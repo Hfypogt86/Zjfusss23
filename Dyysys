@@ -1,0 +1,453 @@
+import requests,re,telebot
+
+from telebot import types
+
+#This Bot For Free By @s_l_3 - @c_p_8
+
+token = input('5645705707:AAGrD542Ba2PGeI7s_pI4w93gpjzT_4x_Vc')
+
+bot = telebot.TeleBot(token)
+
+#الانلاين
+
+startbot = types.InlineKeyboardButton(text='- بحث عن سياره .',callback_data='startbo')
+
+@bot.message_handler(commands=['start'])
+
+def start(message):
+
+	key = types.InlineKeyboardMarkup()	key.add(startbot)
+
+	bot.send_message(message.chat.id,'<strong>- هلا بيك حب هاذا بوت مختص انو يطلعلك غرامات السيارات داخل العراق \nوهسه دز رقم اللوحه مالت السياره\nملاحضه : البوت يعمل مع اللوحات العراقيه فقط .</strong>',parse_mode='html',reply_markup=key)
+
+@bot.callback_query_handler(func=lambda call:True)
+
+def qwewewe(call):
+
+	if call.data == 'startbo':
+
+		getnumbercar(call.message)
+
+#This Bot For Free By @s_l_3 - @c_p_8
+
+def getnumbercar(message):
+
+	coder = bot.edit_message_text(chat_id=message.chat.id,message_id=message.message_id,text=f'<strong>- هسه دز رقم اللوحه بس .</strong>',parse_mode='html')
+
+	bot.register_next_step_handler(coder,getnamecar)
+
+def getnamecar(message):
+
+	global numbercar
+
+	numbercar = message.text
+
+	send = bot.send_message(message.chat.id,f'''<strong>تمام حياتي انت دخلت رقم اللوحه( {numbercar} ) للسياره .
+
+- هسه اختار نوع السياره ملاحضه : اكتب الرقم بس بس الكلمات عوفهن ذن بس تعريف .
+
+1 - ( سياره خصوصيه ) .
+
+2 - ( سياره فحص مؤقت ) .
+
+3 - ( سياره تكسي ) .
+
+4 - ( سياره حمل ) .
+
+5 - ( سياره زراعه ) .
+
+- 6 ( سياره انشائيه ) .
+
+- 7 ( دراجات ) .
+
+- 8 سياره حكوميه</strong>''',parse_mode='html')
+
+	bot.register_next_step_handler(send,getnumberclass)
+
+	
+
+def getnumberclass(message):
+
+	global typecar
+
+	numberclass = message.text
+
+	if numberclass == '1':
+
+		typecar = 'سياره خصوصيه'
+
+	if numberclass == '2':	
+
+		typecar = 'سياره فحص مؤقت'
+
+	if numberclass == '3':
+
+		typecar = 'سياره تكسي'
+
+	if numberclass == '4':
+
+		typecar = 'سياره حمل'
+
+	if numberclass == '5':
+
+		typecar = 'سياره زراعه'
+
+	if numberclass == '6':
+
+		typecar = 'سياره انشائيه'
+
+	if numberclass == '7':
+
+		typecar = 'دراجات'
+
+	if numberclass == '8':
+
+		typecar = 'سياره حكوميه'
+
+	#This Bot For Free By @s_l_3 - @c_p_8
+
+	coder = bot.send_message(message.chat.id,f'''<strong>
+
+- اوك حب .
+
+رقم السياره ( {numbercar} ) .
+
+صنف السياره  (.{typecar} ) .
+
+- هسه اختار محافضه السيارة .
+
+1 - بغداد .
+
+2 - نينوى .
+
+3 - بصره .
+
+4 - صلاح الدين .
+
+5 - ديالى .
+
+6 - الانبار .
+
+7 - كربلاء المقدسه .
+
+8 - النجف الاشرف .
+
+9 - القادسيه .
+
+10 - المثنى . 
+
+11 - واسط .
+
+12 - ميسان . 
+
+13 - ذي قار .
+
+14 - اربيل .
+
+15 - سليمانيه .
+
+16 - دهوك .
+
+</strong>''',parse_mode='html')
+
+	bot.register_next_step_handler(coder,getcitycar)
+
+def getcitycar(message):
+
+	global carcity
+
+	citycar = message.text
+
+	if citycar == '1':
+
+		carcity = 'بغداد'
+
+	if citycar == '2':
+
+		carcity = 'نينوى'
+
+	if citycar == '3':
+
+		carcity = 'بصره'
+
+	if citycar == '4':
+
+		carcity = 'صلاح الدين'
+
+	if citycar == '5':
+
+		carcity = 'ديالى'
+
+	if citycar == '6':
+
+		carcity = 'الانبار'
+
+	if citycar == '7':
+
+		carcity = 'كربلاء المقدسه'
+
+	if citycar == '8':
+
+		carcity = 'النجف الاشرف'
+
+	if citycar == '9':
+
+		carcity = 'القادسيه'
+
+	if citycar == '10':
+
+		carcity = 'المثنى'
+
+	if citycar == '11':
+
+		carcity = 'واسط'
+
+	if citycar == '12':
+
+		carcity = 'ميسان'
+
+	if citycar == '13':
+
+		carcity = 'ذي قار'
+
+	if citycar == '14':
+
+		carcity = 'اربيل'
+
+	if citycar == '15':
+
+		carcity = 'سليمانيه'
+
+	#This Bot For Free By @s_l_3 - @c_p_8
+
+	if citycar == '16':
+
+		carcity = 'دهوك'
+
+	send = bot.send_message(message.chat.id,f'''<strong>حسنا عزيزي 👀
+
+رقم السياره  : {numbercar} .
+
+صنف السياره : {typecar} .
+
+محافضه السياره : {carcity} .
+
+- اختار حرف السيارة .
+
+1 - ( A  - ا )
+
+2 - ( B  - ب )
+
+3 - ( j  - ج )
+
+4 - ( D  - د )
+
+5 - ( R  - ر )
+
+6 - ( S  - س )
+
+7 - ( T  - ط )
+
+8 - ( F  - ف )
+
+9 - ( K  - ك )
+
+10 - ( M  - م )
+
+11 - ( N  - ن )
+
+12 - ( H  - ه )
+
+13 - ( W  - و )
+
+14 - ( E  - ي )
+
+15 - ( L  - ل )
+
+16 - ( Z  - ز )
+
+17 - ( Q  - ق )
+
+18 - ( بلا )</strong>''',parse_mode='html')
+
+	bot.register_next_step_handler(send,getinfocar)
+
+	
+
+def getinfocar(message):
+
+	lettercar = message.text
+
+	if lettercar == '1':
+
+		carletter = 'ا'
+
+	if lettercar == '2':
+
+		carletter = 'ب'
+
+	if lettercar == '3':
+
+		carletter = 'ج'
+
+	if lettercar == '4':
+
+		carletter = 'د'
+
+	if lettercar == '5':
+
+		carletter = 'ر'
+
+	if lettercar == '6':
+
+		carletter = 'س'
+
+	if lettercar == '7':
+
+		carletter = 'ط'
+
+	if lettercar == '8':
+
+		carletter = 'ف'
+
+	if lettercar == '9':
+
+		carletter = 'ك'
+
+	if lettercar == '10':
+
+		carletter = 'م'
+
+	if lettercar == '11':
+
+		carletter = 'ن'
+
+	if lettercar == '12':
+
+		carletter = 'ه'
+
+	if lettercar == '13':
+
+		carletter = 'و'
+
+	#This Bot For Free By @s_l_3 - @c_p_8
+
+	if lettercar == '14':
+
+		carletter = 'ي'
+
+	if lettercar == '15':
+
+		carletter = 'ل'
+
+	if lettercar == '16':
+
+		carletter = 'ز'
+
+	if lettercar == '17':
+
+		carletter = 'ق'
+
+	if lettercar == '18':
+
+		carletter = 'old'
+
+	# -- .
+
+	url = 'https://itp.gov.iq/carSearch.php'
+
+	headers = {
+
+		'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+
+		'accept-encoding': 'gzip, deflate, br',
+
+		'accept-language': 'ar,en;q=0.9,en-GB;q=0.8,en-US;q=0.7',
+
+	  'cache-control': 'no-cache',
+
+	  'content-length': '135',
+
+	  'content-type': 'application/x-www-form-urlencoded',
+
+	  'origin': 'https://itp.gov.iq',
+
+	  'pragma': 'no-cache',
+
+	  'referer': 'https://itp.gov.iq/carSearch.php',
+
+	  'sec-ch-ua': '" Not;A Brand";v="99", "Microsoft Edge";v="103", "Chromium";v="103"' ,
+
+	  'sec-ch-ua-mobile': '?0',
+
+	  'sec-ch-ua-platform': "Windows",
+
+	  'sec-fetch-dest': 'document',
+
+	  'sec-fetch-mode': 'navigate',
+
+	  'sec-fetch-site': 'same-origin',
+
+	
+
+}
+
+	s_l_3 = {
+
+		
+
+		'CarLetter': f'{carletter}',
+
+		'CarNumber': f'{numbercar}',
+
+		'CarType': f'{typecar}',
+
+		'CarReg': f'{carcity}',
+
+		'submit': 'بحث',
+
+	
+
+}
+
+#This Bot For Free By @s_l_3 - @c_p_8
+
+	req = requests.post(url,headers=headers,data=s_l_3)
+
+	if " - لا توجد غرامات مفروضه على السياره - شكرا لالتزامكم بقواعد السير الامن ." in req.text:
+
+		bot.send_message(message.chat.id,f'<strong>- عزيزي الرقم ( {numbercar} ) لا توجد عليه اي غرامه مروريه .</strong>',parse_mode='html')
+
+	else:
+
+		NumberM = re.findall("<td>(.*?)</td>",req.text)[0]
+
+		MoneyNumber = re.findall("<td>(.*?)</td>",req.text)[1]
+
+		City = re.findall("<td>(.*?)</td>",req.text)[2]
+
+		Time = re.findall("<td>(.*?)</td>",req.text)[3]
+
+		All = re.findall('<td id="blink">(.*?)</td>',req.text)
+
+		bot.send_message(message.chat.id,f'''<strong>
+
+	- اكو غرامه بالسيارة .
+
+- رقم الغرامه : {NumberM} .
+
+- مبلغ الغرامه : {MoneyNumber} .
+
+- مكان الغرامه : {City} .
+
+- الوقت : {Time} .
+
+- المبلغ الكلي : {All} .
+
+- مبرمج البوت : @s_l_3 .
+
+	</strong>''',parse_mode='html')
+
+bot.infinity_polling(True)
+
+#This Bot For Free By @s_l_3 - @c_p_8
